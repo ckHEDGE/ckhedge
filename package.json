@@ -13,8 +13,7 @@
   },
   "type": "module",
   "workspaces": [
-    "src/ckhedge_landing",
-    "src/dashboard"
+    "src/ckhedge_frontend"
   ],
   "dependencies": {
     "@dfinity/agent": "^2.1.2",

@@ -6,17 +6,10 @@
     },
     "ckhedge_frontend": {
       "source": [
-        "src/ckhedge_landing/dist"
+        "src/ckhedge_frontend/dist"
       ],
       "type": "assets",
-      "workspace": "ckhedge_landing"
-    },
-    "dashboard": {
-      "source": [
-        "src/dashboard/dist"
-      ],
-      "type": "assets",
-      "workspace": "dashboard"
+      "workspace": "ckhedge_frontend"
     },
     "internet_identity": {
       "type": "custom",
