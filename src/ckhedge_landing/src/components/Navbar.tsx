@@ -1,5 +1,9 @@
+import { useState } from "react";
+import { MdMenu } from "react-icons/md";
+import Menu from "../pages/Home/Menu";
 
 const Navbar = () => {
+  const [toggle, setToggle] = useState(false);
   return (
     <div className="flex justify-between">
       <div className="flex items-center gap-2">
@@ -9,7 +13,7 @@ const Navbar = () => {
         <span className="font-bold">ckHEDGE</span>
       </div>
       <div className="">
-        <ul className="flex gap-7 items-center">
+        <ul className="ss:flex gap-7 hidden items-center">
           <li>API</li>
           <li>Docs</li>
           <li>Audit</li>
@@ -19,6 +23,12 @@ const Navbar = () => {
             </button>
           </li>
         </ul>
+        <div className="ss:hidden">
+          <MdMenu
+            onClick={() => setToggle(true)}
+           className="text-white text-2xl hover:cursor-pointer" />
+        </div>
+        {toggle && <Menu setToggle={setToggle} />}
       </div>
     </div>
   )

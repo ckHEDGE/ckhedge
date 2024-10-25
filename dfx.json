@@ -6,7 +6,7 @@
     },
     "ckhedge_frontend": {
       "source": [
-        "src/ckhedge_frontend/dist"
+        "src/ckhedge_landing/dist"
       ],
       "type": "assets",
       "workspace": "ckhedge_landing"
@@ -34,7 +34,7 @@
   "defaults": {
     "build": {
       "args": "",
-      "packtool": ""
+      "packtool": "mops sources"
     }
   },
   "output_env_file": ".env",

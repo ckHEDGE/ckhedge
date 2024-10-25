@@ -23,13 +23,15 @@ const App = () => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-customPurple to-customPink min-h-screen text-white py-5 px-20">     
-     <Navbar />
-      <Routes>
-        <Route index element={<Home />} />
-        <Route path="/dashboard" element={<Userdashboard />} />
-        <Route path="/trade" element={<Trade />} />
-      </Routes>
+    <div className="bg-gradient-to-br from-customPurple to-customPink  text-white pt-5 sm:px-20 px-5 grid min-h-[100vh] grid-rows-[auto_1fr_auto]">
+      <Navbar />
+      <div className="">
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path="/dashboard" element={<Userdashboard />} />
+          <Route path="/trade" element={<Trade />} />
+        </Routes>
+      </div>
       <Footer />
     </div>
   );
