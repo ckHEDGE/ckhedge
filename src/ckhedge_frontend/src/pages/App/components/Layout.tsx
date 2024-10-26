@@ -3,7 +3,7 @@ import AppNavbar from "./AppNavbar";
 
 const Layout = () => {
   return (
-    <div className="bg-black text-white h-screen pt-5 px-10">
+    <div className="bg-black text-white  py-5 px-10">
       <AppNavbar />
       <Outlet />
     </div>

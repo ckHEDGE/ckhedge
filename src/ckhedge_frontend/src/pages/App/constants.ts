@@ -24,3 +24,69 @@ export const pages = [
       route: "/governance",
     }
   ]
+
+  export const orderBookData =  [
+    { price: '43.114', amount: '3396.4537', total: '3,397.1437' },
+    { price: '43.114', amount: '3396.4537', total: '3,397.1437' },
+    { price: '43.114', amount: '3396.4537', total: '3,397.1437' },
+    { price: '43.114', amount: '3396.4537', total: '3,397.1437' },
+    { price: '43.114', amount: '3396.4537', total: '3,397.1437' },
+    { price: '43.114', amount: '3396.4537', total: '3,397.1437' },
+    { price: '43.114', amount: '3396.4537', total: '3,397.1437' },
+    { price: '43.114', amount: '3396.4537', total: '3,397.1437' },
+    { price: '43.114', amount: '3396.4537', total: '3,397.1437' },
+    { price: '43.114', amount: '3396.4537', total: '3,397.1437' },
+    { price: '43.114', amount: '3396.4537', total: '3,397.1437' },
+    { price: '43.114', amount: '3396.4537', total: '3,397.1437' },
+    { price: '43.114', amount: '3396.4537', total: '3,397.1437' },
+    { price: '43.114', amount: '3396.4537', total: '3,397.1437' },
+    { price: '43.114', amount: '3396.4537', total: '3,397.1437' },
+    { price: '43.114', amount: '3396.4537', total: '3,397.1437' },
+    { price: '43.114', amount: '3396.4537', total: '3,397.1437' },
+    { price: '43.114', amount: '3396.4537', total: '3,397.1437' },
+    { price: '43.114', amount: '3396.4537', total: '3,397.1437' }
+  ];
+
+  export const orderData = [
+    {
+      time: "2022/07/30 16:18:41",
+      pair: "BTC/USDT",
+      type: "Limit Order",
+      action: "Buy",
+      price: "36,641.20",
+      amount: "0.265622",
+      filled: "25%",
+      unfilled: "75%",
+    },
+    {
+      time: "2022/07/30 16:18:41",
+      pair: "BTC/USDT",
+      type: "Limit Order",
+      action: "Sell",
+      price: "36,641.20",
+      amount: "1.56525",
+      filled: "25%",
+      unfilled: "75%",
+    },
+    {
+      time: "2022/07/30 16:18:41",
+      pair: "BTC/USDT",
+      type: "Limit Order",
+      action: "Buy",
+      price: "36,641.20",
+      amount: "0.265622",
+      filled: "25%",
+      unfilled: "75%",
+    },
+    {
+      time: "2022/07/30 16:18:41",
+      pair: "BTC/USDT",
+      type: "Limit Order",
+      action: "Sell",
+      price: "36,641.20",
+      amount: "0.265622",
+      filled: "50%",
+      unfilled: "50%",
+    },
+  ];
+  

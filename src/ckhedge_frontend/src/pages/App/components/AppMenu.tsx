@@ -12,7 +12,7 @@ const AppMenu = ({ setToggle }) => {
                 <button className="text-xl pb-5 pt-3" onClick={() => setToggle(false)}>
                     <AiOutlineClose />
                 </button>
-                <ul className="list-none flex-1 items-center flex-col justify-end ">
+                <ul className=" flex-1 items-center flex-col justify-end ">
                     {pages.map((page, index) => (
                         <li
                         key={index}
