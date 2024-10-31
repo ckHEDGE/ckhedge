@@ -1,10 +1,31 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { MdMenu } from "react-icons/md";
 import Menu from "./Menu";
 import { Link } from "react-router-dom";
+import { ConnectWallet, useIdentityKit, useAgent } from "@nfid/identitykit/react"
+import { Actor } from "@dfinity/agent";
+import { idlFactory, canisterId } from "../../../../../declarations/ckhedge_backend";
+
 
 const Navbar = () => {
-  const [toggle, setToggle] = useState(false);
+  // const agent = useMemo(() => useAgent(), [/* dependencies */]);
+  // console.log("Agent: ", agent);
+
+  const { identity, delegationType } = useIdentityKit()
+
+  console.log("Identity: ", identity);
+  const [toggle, setToggle] = useState(false)
+
+  
+
+  // const targetActor =
+  //   agent &&
+  //   Actor.createActor(idlFactory, {
+  //     agent,
+  //     canisterId,
+  //   })
+
+
   return (
     <div className="flex justify-between">
       <div className="flex items-center gap-2">
@@ -23,11 +44,14 @@ const Navbar = () => {
               Launch App
             </Link>
           </li>
+          <li>
+            <ConnectWallet />
+          </li>
         </ul>
         <div className="ss:hidden">
           <MdMenu
             onClick={() => setToggle(true)}
-           className="text-white text-2xl hover:cursor-pointer" />
+            className="text-white text-2xl hover:cursor-pointer" />
         </div>
         {toggle && <Menu setToggle={setToggle} />}
       </div>

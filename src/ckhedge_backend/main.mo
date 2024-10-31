@@ -17,7 +17,7 @@ actor {
   type User = Types.User;
   type UserId = Types.UserId; // PrincipalId string
 
-  private stable var stableUsers : [(UserId, User)] = [];
+  private stable var _stableUsers : [(UserId, User)] = [];
   var users = HashMap.HashMap<UserId, User>(0, Text.equal, Text.hash);
 
   /************************************

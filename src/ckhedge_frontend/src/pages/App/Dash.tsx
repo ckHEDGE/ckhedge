@@ -4,6 +4,7 @@ import OrderBookTable from './components/OrderBookTable'
 import { ClientKey } from '../../../../declarations/ckhedge_backend/ckhedge_backend.did';
 import { Link } from 'react-router-dom';
 import OrdersTable from './components/OrdersTable';
+import Chat from './components/Chat';
 
 const Dash = () => {
   return (
@@ -26,63 +27,7 @@ const Dash = () => {
 
           {/* Chart column */}
 
-          <div className="col-span-2 ">
-            <div className="flex items-center justify-between mt-2">
-              <div className="border border-[#43507a] rounded-2xl  w-fit flex items-center gap-4 p-1  ">
-                <button className='py-2 px-5 bg-[#1c2530] rounded-2xl '>
-                  Candle Line
-                </button>
-                <button
-                  className='py-2 px-5 rounded-2xl'
-                >
-                  Depth Chart
-                </button>
-              </div>
-              <div className="flex gap-4 ml-6">
-                <button>
-                  <FiSettings size={18} />
-                </button>
-                <button>
-                  <FiCamera size={18} />
-                </button>
-                <button>
-                  <MdFullscreen size={25} />
-                </button>
-              </div>
-              <div className="flex gap-3">
-                <button
-                  className='rounded-2xl bg-[#0CAF60] border border-[#43507a] px-3 py-1'
-                >
-                  1D
-                </button>
-                <button
-                  className='rounded-2xl border border-[#43507a] px-3 py-1'
-                >
-                  1M
-                </button>
-                <button
-                  className='rounded-2xl border border-[#43507a] px-3 py-1'
-                >
-                  6M
-                </button>
-                <button
-                  className='rounded-2xl border border-[#43507a] px-3 py-1'
-                >
-                  1Y
-                </button>
-                <button
-                  className='rounded-2xl border border-[#43507a] px-3 py-1'
-                >
-                  ALL
-                </button>
-              </div>
-            </div>
-            <div className="mt-5">
-              <img src="/Chart.svg" alt="chart"
-                className="w-full"
-              />
-            </div>
-          </div>
+          <Chat />
 
           {/* Buy sell column */}
 

@@ -17,18 +17,18 @@ const App = () => {
 
   return (
     <Suspense fallback={<LoadingScreen />}>
-    <Routes>
-      <Route index element={<Home />} />
-      <Route element={<Layout />}>
-        <Route path="/app" element={<Dash />} />
-        <Route path="/trade" element={<Trade />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/insurance" element={<Insurance />} />
-        <Route path="/stacking" element={<Stacking />} />
-        <Route path="/history" element={<History />} />
-        <Route path="/governance" element={<Governance />} />
-      </Route>
-    </Routes>
+      <Routes>
+        <Route index element={<Home />} />
+        <Route element={<Layout />}>
+          <Route path="/app" element={<Dash />} />
+          <Route path="/trade" element={<Trade />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/insurance" element={<Insurance />} />
+          <Route path="/stacking" element={<Stacking />} />
+          <Route path="/history" element={<History />} />
+          <Route path="/governance" element={<Governance />} />
+        </Route>
+      </Routes>
     </Suspense>
   );
 };

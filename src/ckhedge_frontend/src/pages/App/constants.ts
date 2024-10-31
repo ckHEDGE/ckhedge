@@ -1,3 +1,25 @@
+
+import { ApexOptions } from 'apexcharts';
+export const candleStickOptions: ApexOptions = {
+    chart: {
+        type: 'candlestick',
+    },
+    title: {
+        text: 'Stock Chart',
+        align: 'left',
+    },
+    xaxis: {
+        type: 'datetime',
+    },
+    yaxis: {
+        tooltip: {
+            enabled: true,
+        },
+    },
+};
+
+
+
 export const pages = [
     {
       name: "Trade",
@@ -89,4 +111,5 @@ export const pages = [
       unfilled: "50%",
     },
   ];
+  
   
