@@ -1,23 +1,19 @@
-import { useMemo, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import { MdMenu } from "react-icons/md";
 import Menu from "./Menu";
 import { Link } from "react-router-dom";
-import { ConnectWallet, useIdentityKit, useAgent } from "@nfid/identitykit/react"
-import { Actor } from "@dfinity/agent";
 import { idlFactory, canisterId } from "../../../../../declarations/ckhedge_backend";
+import { Actor } from "@dfinity/agent";
+import { WalletListModal } from "../../../components/WalletListModal";
+import { AuthContext } from "../../../hooks/auth/AuthContext";
+import ConnectedButton from "./ConnectedButton";
 
 
 const Navbar = () => {
-  // const agent = useMemo(() => useAgent(), [/* dependencies */]);
+  // const agent = useAgent()
   // console.log("Agent: ", agent);
-
-  const { identity, delegationType } = useIdentityKit()
-
-  console.log("Identity: ", identity);
-  const [toggle, setToggle] = useState(false)
-
-  
-
+  // const { identity, delegationType } = useIdentityKit()
+  // console.log("Identity: ", identity);
   // const targetActor =
   //   agent &&
   //   Actor.createActor(idlFactory, {
@@ -25,6 +21,15 @@ const Navbar = () => {
   //     canisterId,
   //   })
 
+  const { isAuthenticated } = useContext(AuthContext);
+
+  const [toggle, setToggle] = useState(false)
+  const [openWalletList, setOpenWalletList] = useState(false);
+
+
+  const handleWalletListClose = () => {
+    setOpenWalletList(false);
+  };
 
   return (
     <div className="flex justify-between">
@@ -40,12 +45,14 @@ const Navbar = () => {
           <li>Docs</li>
           <li>Audit</li>
           <li>
-            <Link to="/app" className="bg-white rounded p-2 text-[#4701AE] font-semibold ">
-              Launch App
-            </Link>
-          </li>
-          <li>
-            <ConnectWallet />
+            {isAuthenticated ? 
+            <div>
+              <ConnectedButton />
+            </div> : <button
+              onClick={() => setOpenWalletList(true)}
+              className="bg-white rounded p-2 text-[#4701AE]  font-semibold">
+              Connect Wallet
+            </button>}
           </li>
         </ul>
         <div className="ss:hidden">
@@ -54,6 +61,7 @@ const Navbar = () => {
             className="text-white text-2xl hover:cursor-pointer" />
         </div>
         {toggle && <Menu setToggle={setToggle} />}
+        <WalletListModal open={openWalletList} onClose={handleWalletListClose} />
       </div>
     </div>
   )

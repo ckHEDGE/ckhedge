@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 const Hero = () => {
   return (
     <div >
@@ -14,7 +16,7 @@ const Hero = () => {
               </p>
             </div>
             <div className="flex ts:flex-row flex-col gap-3 mt-10 justify-center sm:justify-start">
-              <button className="bg-customPink text-white px-4 py-2 rounded-lg">Launch App</button>
+              <Link  to="/app" className="bg-customPink text-white px-4 py-2 rounded-lg">Launch App</Link>
               <button className="text-customPurple bg-white px-10 py-2 rounded-lg">Wallet</button>
             </div>
           </div>

@@ -8,6 +8,7 @@ import App from "./App.js";
 import { IdentityKitAuthType } from "@nfid/identitykit";
 import { canisterId } from "../../declarations/ckhedge_backend";
 import { AuthProvider } from "./hooks/Context";
+import { AuthProvider as Provider2} from "./hooks/auth/AuthContext";
 import "@nfid/identitykit/react/styles.css"
 import { IdentityKitProvider } from "@nfid/identitykit/react"
 
@@ -22,10 +23,12 @@ if (rootElement) {
           targets: [canisterId]
         }}>
         <AuthProvider>
+          <Provider2>
           <BrowserRouter>
             <App />
           </BrowserRouter>
           <ToastContainer />
+          </Provider2>
         </AuthProvider>
       </IdentityKitProvider>
     </React.StrictMode>

@@ -1,64 +1,72 @@
 import Types "types";
-import HashMap "mo:base/HashMap";
 import Text "mo:base/Text";
 import Result "mo:base/Result";
-import Iter "mo:base/Iter";
 import Debug "mo:base/Debug";
+import List "mo:base/List";
+import Principal "mo:base/Principal";
 import IcWebSocketCdk "mo:ic-websocket-cdk";
 import IcWebSocketCdkState "mo:ic-websocket-cdk/State";
 import IcWebSocketCdkTypes "mo:ic-websocket-cdk/Types";
 
 actor {
 
-   type AppMessage = {
+  type AppMessage = {
     message : Text;
   };
 
   type User = Types.User;
   type UserId = Types.UserId; // PrincipalId string
 
-  private stable var _stableUsers : [(UserId, User)] = [];
-  var users = HashMap.HashMap<UserId, User>(0, Text.equal, Text.hash);
+  stable var users = List.nil<User>();
 
   /************************************
   * SECTION: Users CRUD operations
   ************************************/
 
-  public shared func addUser(user : User) : async () {
-    users.put(user.principalId, user);
+  public shared ({ caller }) func registerUser(payload : User) : async Result.Result<User, Text> {
+    assert (not Principal.isAnonymous(caller));
+     let user = List.find<User>(
+            users,
+            func(user : User) : Bool {
+                return user.principalId == caller;
+            },
+        );
+        switch (user) {
+            case (null) {
+                    users := List.push(payload, users);
+                    return #ok(payload);
+            };
+            case (?_val) {
+                return #err("User already exists");
+            };
+        };
   };
 
-  public shared func getUser(userId : UserId) : async Result.Result<User, Text> {
-    switch (users.get(userId)) {
-      case (?user) {
-        #ok(user);
-      };
-      case (null) {
-        #err("User not found");
-      };
+  public shared ({ caller }) func getUsers() : async [User] {
+    assert (not Principal.isAnonymous(caller));
+    List.toArray(users);
+  };
+
+public shared query ({caller}) func getMyProfile() : async Result.Result<User, Text> {
+    let user = List.find<User>(
+        users,
+        func(user : User) : Bool {
+            return user.principalId == caller;
+        },
+    );
+    switch (user) {
+        case (null) {
+            return #err("User not found");
+        };
+        case (?val) {
+            return #ok(val);
+        };
     };
-  };
+};
 
-  public shared func getUsers() : async [User] {
-    Iter.toArray(users.vals());
-  };
-
-  public shared func updateUser(user : User) : async () {
-    users.put(user.principalId, user);
-  };
-
-  public shared func removeUser(userId : UserId) : async () {
-    users.delete(userId);
-  };
-
-  public shared func getUserCount() : async Int {
-    users.size();
-  };
-
-    func on_open(args : IcWebSocketCdk.OnOpenCallbackArgs) : async () {
+  func on_open(args : IcWebSocketCdk.OnOpenCallbackArgs) : async () {
     Debug.print("Client " # debug_show (args.client_principal) # " connected");
   };
-
 
   func on_message(args : IcWebSocketCdk.OnMessageCallbackArgs) : async () {
     Debug.print("Client " # debug_show (args.client_principal) # " sent message: " # debug_show (args.message));
@@ -90,7 +98,7 @@ actor {
   };
 
   // method called by the frontend SDK to send a message to the canister
-  public shared ({ caller }) func ws_message(args : IcWebSocketCdk.CanisterWsMessageArguments, msg:? AppMessage) : async IcWebSocketCdk.CanisterWsMessageResult {
+  public shared ({ caller }) func ws_message(args : IcWebSocketCdk.CanisterWsMessageArguments, msg : ?AppMessage) : async IcWebSocketCdk.CanisterWsMessageResult {
     await ws.ws_message(caller, args, msg);
   };
 

@@ -19,9 +19,12 @@ module.exports = {
     screens: {
       ts: "350px",
       xs: "375px",
+      xs1: "420px",
       ss: "550px",
+      ss1: "600px",
       sm: "770px",
       md: "900px",
+      md1: "1000px",
       lg: "1300px",
       xl: "1700px",
       'h-sm': { 'raw': '(min-height: 700px)' },

@@ -1,10 +1,11 @@
 import Text "mo:base/Text";
+import Principal "mo:base/Principal";
 module {
 
     public type UserId = Text;
 
     public type User = {
-        principalId : Text;
+        principalId : Principal;
         body: ?UserBody;
         created : Int;
     };

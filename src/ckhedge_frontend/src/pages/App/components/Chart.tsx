@@ -1,11 +1,13 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { FiCamera, FiSettings } from 'react-icons/fi';
 import { MdFullscreen } from 'react-icons/md';
 import { formatStockData, getStockData } from '../utils/utils';
 import ReactApexChart from 'react-apexcharts';
 import { candleStickOptions } from '../constants';
+import PeriodDropdown from './PeriodDropdown';
+import ChartMenu from './ChartMenu';
 
-const Chat = () => {
+const Chart = () => {
     interface StockData {
         [key: string]: {
             '1. open': number;
@@ -39,58 +41,25 @@ const Chat = () => {
         [stockData]
     );
 
-
     return (
-        <div className="col-span-2">
-            <div className="flex items-center justify-between mt-2">
+        <div className="col-span-3">
+            <div className="flex items-center justify-between mt-2 gap-2">
                 <div className="border border-[#43507a] rounded-2xl  w-fit flex items-center gap-4 p-1  ">
-                    <button className='py-2 px-5 bg-[#1c2530] rounded-2xl '>
+                    <button className='py-2 px-2 bg-[#1c2530] rounded-2xl '>
                         Candle Line
                     </button>
                     <button
-                        className='py-2 px-5 rounded-2xl'
+                        className='py-2 px-2 rounded-2xl'
                     >
                         Depth Chart
                     </button>
                 </div>
-                <div className="flex gap-4 ml-6">
-                    <button>
-                        <FiSettings size={18} />
-                    </button>
-                    <button>
-                        <FiCamera size={18} />
-                    </button>
-                    <button>
-                        <MdFullscreen size={25} />
-                    </button>
-                </div>
-                <div className="flex gap-3">
-                    <button
-                        className='rounded-2xl bg-[#0CAF60] border border-[#43507a] px-3 py-1'
-                    >
-                        1D
-                    </button>
-                    <button
-                        className='rounded-2xl border border-[#43507a] px-3 py-1'
-                    >
-                        1M
-                    </button>
-                    <button
-                        className='rounded-2xl border border-[#43507a] px-3 py-1'
-                    >
-                        6M
-                    </button>
-                    <button
-                        className='rounded-2xl border border-[#43507a] px-3 py-1'
-                    >
-                        1Y
-                    </button>
-                    <button
-                        className='rounded-2xl border border-[#43507a] px-3 py-1'
-                    >
-                        ALL
-                    </button>
-                </div>
+             <div className="flex gap-3">
+             <PeriodDropdown />
+             <ChartMenu />
+             </div>
+
+
             </div>
             <div className="mt-5">
                 <ReactApexChart
@@ -109,4 +78,4 @@ const Chat = () => {
     )
 }
 
-export default Chat
+export default Chart

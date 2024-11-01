@@ -15,8 +15,8 @@ import {
   import { canisterId, idlFactory } from "../../../declarations/ckhedge_backend";
   import { _SERVICE} from "../../../declarations/ckhedge_backend/ckhedge_backend.did";
 import { useAgent } from "@nfid/identitykit/react";
+import { network } from "./constants";
   
-  export const network = process.env.DFX_NETWORK || "local";
   const localhost = "http://localhost:4943";
   const host = "https://icp0.io";
   
@@ -54,8 +54,7 @@ import { useAgent } from "@nfid/identitykit/react";
 
     const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
     const [authClient, setAuthClient] = useState<AuthClient | null>(null);
-    const [backendActor, setBackendActor] =
-      useState<ActorSubclass<_SERVICE> | null>(null);
+    const [backendActor, setBackendActor] = useState<ActorSubclass<_SERVICE> | null>(null);
     const [identity, setIdentity] = useState<Identity | null>(null);
   
   
