@@ -3,7 +3,7 @@ import { AuthClient } from "@dfinity/auth-client";
 import fetch from "cross-fetch";
 import { WalletType } from "./wallet";
 
-const APPLICATION_NAME = "ckHedge";
+const APPLICATION_NAME = "ckHEDGE";
 const APPLICATION_LOGO_URL =
   "https://dev.nfid.one/static/media/id.300eb72f3335b50f5653a7d6ad5467b3.svg";
 const AUTH_PATH =

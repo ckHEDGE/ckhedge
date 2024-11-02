@@ -42,7 +42,9 @@ const Navbar = () => {
       <div className="">
         <ul className="ss:flex gap-7 hidden items-center">
           <li>API</li>
-          <li>Docs</li>
+          <li>
+            <a href="https://docs.ckhedge.finance/">Docs</a>
+          </li>
           <li>Audit</li>
           <li>
             {isAuthenticated ? 

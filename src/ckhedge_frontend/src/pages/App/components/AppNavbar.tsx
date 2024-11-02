@@ -44,7 +44,7 @@ const AppNavbar = () => {
                             <ConnectedButton />
                             : <button
                                 onClick={() => setOpenWalletList(true)}
-                                className="bg-white rounded p-2 text-[#4701AE]  font-semibold">
+                                className="bg-blue-500 rounded p-2 text-white  font-semibold">
                                 Connect Wallet
                             </button>}
                     </div>

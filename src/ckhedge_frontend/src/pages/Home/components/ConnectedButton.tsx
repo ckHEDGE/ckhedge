@@ -3,6 +3,7 @@ import { AuthContext } from '../../../hooks/auth/AuthContext';
 import icblast from "@infu/icblast"
 import { Principal } from '@psychedelic/dab-js';
 import { FaRegCopy } from "react-icons/fa6";
+import { toast } from 'react-toastify';
 
 type Balance = {
     name: string;
@@ -16,7 +17,7 @@ const tokens = [
         id: "ryjl3-tyaaa-aaaaa-aaaba-cai"
     },
     {
-        name: "ckHedge",
+        name: "ckHEDGE",
         id: "r6qdv-dqaaa-aaaal-qmy7a-cai"
     }
 ]
@@ -32,6 +33,7 @@ const ConnectedButton = () => {
     const { logout } = useContext(AuthContext);
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const ids = localStorage.getItem("session-data");
@@ -48,26 +50,32 @@ const ConnectedButton = () => {
             console.error("Principal or Aid not available");
             return;
         }
-        let _balances: Balance[] = [];
-        for (let token of tokens) {
-            let ic = icblast({
-                local: false
-            })
+        try {
+            let _balances: Balance[] = [];
+            for (let token of tokens) {
+                let ic = icblast({
+                    local: false
+                })
 
-            const user = {
-                owner: Principal.fromText(ids.principal),
-                subaccount: null
+                const user = {
+                    owner: Principal.fromText(ids.principal),
+                    subaccount: null
+                }
+                let decimals = 8
+                let actor = await ic(token.id)
+                const bal = await actor.icrc1_balance_of(user);
+                if (token.name !== "ICP") {
+                    decimals = await actor.icrc1_decimals();
+                }
+                const balance = Number(bal) / (10 ** decimals);
+                _balances.push({ name: token.name, value: balance });
             }
-            let decimals = 8
-            let actor = await ic(token.id)
-            const bal = await actor.icrc1_balance_of(user);
-            if (token.name !== "ICP") {
-                decimals = await actor.icrc1_decimals();
-            }
-            const balance = Number(bal) / (10 ** decimals);
-            _balances.push({ name: token.name, value: balance });
+            setLoading(false);
+            setBalances(_balances);
+        } catch (error) {
+            setLoading(false);
+            console.log("Error in getting balances: ", error);
         }
-        setBalances(_balances);
     };
 
     const handleClickOutside = (event: MouseEvent) => {
@@ -100,10 +108,8 @@ const ConnectedButton = () => {
 
     const copyToClipboard = (text: string) => {
         navigator.clipboard.writeText(text);
-        alert("Copied to clipboard!");
+        toast.success("Copied to clipboard");
     };
-
-
 
     return (
         <div className="relative inline-block text-left" ref={dropdownRef}>
@@ -134,7 +140,7 @@ const ConnectedButton = () => {
 
             {isOpen && (
                 <div
-                    className="absolute right-0 z-10 mt-2 w-64 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                    className="absolute right-0 z-50 mt-2 w-64 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                     role="menu"
                     aria-orientation="vertical"
                     aria-labelledby="menu-button"
@@ -170,7 +176,13 @@ const ConnectedButton = () => {
                                 ))}
                             </ul>
                         ) : (
-                            <p className="text-sm text-gray-500">No balances available</p>
+                            <div className="flex justify-center items-center h-20">
+                                {loading ? (
+                                    <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-gray-900"></div>
+                                ) : (
+                                    <p className="text-center text-gray-700">No balances available</p>
+                                )}
+                            </div>
                         )}
                     </div>
 
